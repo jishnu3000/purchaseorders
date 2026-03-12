@@ -1,0 +1,190 @@
+### Get the all services
+GET http://localhost:4004/odata/v4/CatalogService
+
+### Get the metadata of the service
+GET http://localhost:4004/odata/v4/CatalogService/$metadata
+
+### Get the metadata of the service BusinessPartnerSrv
+GET http://localhost:4004/odata/v4/CatalogService/BusinessPartnerSrv
+
+### Get the metadata of the service AddressSrv
+GET http://localhost:4004/odata/v4/CatalogService/AddressSrv
+
+### Get the metadata of the service EmployeeSrv
+GET http://localhost:4004/odata/v4/CatalogService/EmployeeSrv
+
+### Get the metadata of the service Currencies
+GET http://localhost:4004/odata/v4/CatalogService/Currencies
+
+### Get the metadata of the service Currencies_texts
+### GET http://localhost:4004/odata/v4/CatalogService/Currencies_texts
+
+### Get the metadata of the service ProductSrv
+GET http://localhost:4004/odata/v4/CatalogService/ProductSrv
+
+### Get the metadata of the service PurchaseOrderSrv
+GET http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSrv
+
+### Get the metadata of the service PurchaseItemSrv
+GET http://localhost:4004/odata/v4/CatalogService/PurchaseItemSrv
+
+### Get the metadata of the service EmployeeSrv top 10
+GET http://localhost:4004/odata/v4/CatalogService/EmployeeSrv?$top=10
+
+### Get the metadata of the service EmployeeSrv top 10 skip 10
+GET http://localhost:4004/odata/v4/CatalogService/EmployeeSrv?$top=10&$skip=10
+
+### Get the metadata of the service EmployeeSrv top 20 skip 10
+GET http://localhost:4004/odata/v4/CatalogService/EmployeeSrv?$top=20&$skip=10
+
+### Get the metadata of the service EmployeeSrv top 20 skip 20
+GET http://localhost:4004/odata/v4/CatalogService/EmployeeSrv?$top=20&$skip=20
+
+### Get the metadata of the service EmployeeSrv count
+GET http://localhost:4004/odata/v4/CatalogService/EmployeeSrv/$count
+
+### Get the metadata of the service EmployeeSrv select
+GET http://localhost:4004/odata/v4/CatalogService/EmployeeSrv?$select=nameFirst,nameLast,nameMiddle,salary,phoneNumber
+
+### Insert a record
+POST http://localhost:4004/odata/v4/CatalogService/EmployeeSrv
+Content-Type: application/json
+
+{
+      "ID": "02BD2137-0890-1EEA-A6C2-BB55C19787AA",
+      "accountNumber": "1119999888",
+      "bankId": "510000007",
+      "bankName": "Axis Bank",
+      "currency_code": "INR",
+      "email": "frank.castle@itelo.info",
+      "gender": "M",
+      "language": "E",
+      "loginName": "FRANKC",
+      "nameFirst": "Frank",
+      "nameInitials": null,
+      "nameLast": "Castle",
+      "nameMiddle": null,
+      "phoneNumber": "+1 77744 88855",
+      "salary": "85500.00"
+}
+
+### Update
+PUT http://localhost:4004/odata/v4/CatalogService/EmployeeSrv/02BD2137-0890-1EEA-A6C2-BB55C19787AA
+Content-Type: application/json
+
+{
+    "salary": "95000.00",
+    "currency_code": "USD"
+}
+
+### expand
+GET http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSrv?$expand=Items
+
+### Get the address data
+GET http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSrv?$filter=GROSS_AMOUNT gt 3000
+
+########################################
+
+### employees whos names starts with S
+
+
+### employees who are male
+GET http://localhost:4004/odata/v4/CatalogService/EmployeeSrv?$filter=gender eq 'M'
+
+### orders and items where net amt > 3000
+GET http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSrv?$expand=Items&filter=NET_AMOUNT gt 3000
+
+### products whose width is greater than 30 and height is less than 30
+GET http://localhost:4004/odata/v4/CatalogService/ProductSrv?$filter=WIDTH gt 30&filter=HEIGHT lt 30
+
+### addresses who are from US
+GET http://localhost:4004/odata/v4/CatalogService/AddressSrv?$filter=COUNTRY eq 'US'
+
+### business partners BP id is greater than 100000023
+GET http://localhost:4004/odata/v4/CatalogService/BusinessPartnerSrv?$filter=BP_ID gt 100000023
+
+### products of weight unit 'G'
+GET http://localhost:4004/odata/v4/CatalogService/ProductSrv?$filter=WEIGHT_UNIT eq 'G'
+
+### products of category 'Mice'
+GET http://localhost:4004/odata/v4/CatalogService/ProductSrv?$filter=CATEGORY eq 'Mice'
+
+### purchase items where currency code is DKK
+GET http://localhost:4004/odata/v4/CatalogService/PurchaseItemSrv?$filter=CURRENCY_code eq 'DKK'
+
+### purchase orders of life cycle status 'N'
+GET http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSrv?$filter=LIFECYCLE_STATUS eq 'N'
+
+### employees whose namefirst is John
+GET http://localhost:4004/odata/v4/CatalogService/EmployeeSrv?$filter=nameFirst eq 'John'
+
+### Calling the Custom Function
+GET  http://localhost:4004/odata/v4/CatalogService/getEmployeeInfo()
+
+###
+POST http://localhost:4004/odata/v4/CatalogService/createEmployee
+Content-Type: application/json
+
+{
+    "ID": "02BD2137-0890-1EEA-A6C2-BB55C19788CB",
+    "accountNumber": "111222333",
+    "bankId": "510000655",
+    "bankName": "My Bank of India",
+    "currency_code": "USD",
+    "email": "sally.spring@itelo.info",
+    "gender": "F",
+    "language": "E",
+    "loginName": "VKOHLI",
+    "nameFirst": "Virat",
+    "nameInitials": null,
+    "nameLast": "Kohli",
+    "nameMiddle": null,
+    "phoneNumber": "+1 224 374 524",
+    "salary": "55549.00"
+}
+
+###
+POST http://localhost:4004/odata/v4/CatalogService/createAddress
+Content-Type: application/json
+
+{
+    "ADDRESS_TYPE": "999",
+    "BUILDING": "999",
+    "CITY": "Munich",
+    "COUNTRY": "DE",
+    "LATITUDE": "48.331817",
+    "LONGITUDE": "11.736954",
+    "POSTAL": "85300",
+    "STREET": "Zeppelinstrasser",
+    "VAL_END": null,
+    "VAL_START": "0002-01-20"   
+}
+
+### 
+PUT http://localhost:4004/odata/v4/CatalogService/EmployeeSrv/02BD2137-0890-1EEA-A6C2-BB55C19787AA
+Content-Type: application/json
+
+{
+    "salary": "75000",
+    "currency_code": "INR"
+}
+
+### 
+PUT http://localhost:4004/odata/v4/CatalogService/ProductSrv/74867AD200E41EDBA5D8B06B26EB4052
+Content-Type: application/json
+
+{
+    "PRICE": "1000"
+}
+
+###
+GET http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSrv('74867AD200E41EDBA5D8B0C98DC28052')/largestOrder()
+
+###
+POST http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSrv/74867AD200E41EDBA5D8B0C98DC28052/discountPrice
+Content-Type: application/json
+
+{}
+
+###
+GET http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSrv/74867AD200E41EDBA5D8B0C98DC28052
