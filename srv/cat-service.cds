@@ -10,6 +10,7 @@ service CatalogService @(path: 'CatalogService') {
 
     entity ProductSrv as projection on database.master.Products;
 
+    @odata.draft.enabled
     entity PurchaseOrderSrv as projection on database.transaction.PurchaseOrders {
         *,
         case OVERALL_STATUS
@@ -43,7 +44,12 @@ service CatalogService @(path: 'CatalogService') {
     } actions {
         // Instance bounded function
         function largestOrder() returns array of PurchaseOrderSrv ;
+
         // Instance bounded action
+        @cds.odata.bindingparameter.name: 'DP'
+        @Common.SideEffects : {
+            TargetProperties : ['DP/GROSS_AMOUNT']
+        }
         action discountPrice() ;
     }; 
     entity PurchaseItemSrv as projection on database.transaction.PurchaseItems ;

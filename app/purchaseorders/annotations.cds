@@ -28,6 +28,12 @@ annotate service.PurchaseOrderSrv with @(
             Value : CURRENCY_code
         },
         {
+            $Type: 'UI.DataFieldForAction',
+            Action : 'CatalogService.discountPrice',
+            Label : 'Discount',
+            Inline : false
+        },
+        {
             $Type : 'UI.DataField',
             Value : NET_AMOUNT
         },
