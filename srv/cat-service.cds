@@ -1,16 +1,27 @@
 using { poapp.db as database } from '../db/datamodel';
 // using { CDSViews } from '../db/cdsviews';
 
-service CatalogService @(path: 'CatalogService') {
+service CatalogService @(path: 'CatalogService', require: 'authenticated-user') {
     entity BusinessPartnerSrv as projection on database.master.BusinessPartners ;
 
-    entity AddressSrv as projection on database.master.Addresses ;
+    entity AddressSrv @( restrict : [
+        {
+            grant: ['READ'],
+            to: 'Viewer',
+            where: 'COUNTRY = $user.myCountry'
+        },
+        {
+            grant: ['WRITE'],
+            to: 'Admin'
+        }
+    ]) as projection on database.master.Addresses ;
 
+    // @Capabilities : { Insertable : false, }
     entity EmployeeSrv as projection on database.master.Employees ;
 
     entity ProductSrv as projection on database.master.Products;
 
-    @odata.draft.enabled
+    @odata.draft.enabled: true
     entity PurchaseOrderSrv as projection on database.transaction.PurchaseOrders {
         *,
         case OVERALL_STATUS
