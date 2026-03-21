@@ -11,12 +11,12 @@ build-parameters:
         - npm ci
         - npx cds build --production
 modules:
-# Start of UI Module
+# BOC UI Module
   - name: purchaseorders-ui
     type: nodejs
     path: app
     parameters:
-        buildpack: nodejs_buildpack
+      buildpack: nodejs_buildpack
     build-parameters:
       builder: npm-ci
     requires:
@@ -26,9 +26,9 @@ modules:
           name: srv-api
           strictSSL: true
           forwardAuthToken: true
-          url: '~(srv-url)'
+          url: '~{srv-url}'
       - name: purchaseorders-auth
-# End of UI Module
+# EOC UI Module
   - name: purchaseorders-srv
     type: nodejs
     path: gen/srv

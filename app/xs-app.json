@@ -1,18 +1,18 @@
 {
-    "welcomeFile" : "poapp/webapp",
+    "welcomeFile" : "purchaseorders/webapp/",
     "authenticationMethod" : "route",
     "sessionTimeout" : 100,
     "pluginMetadataEndpoint" : "/metadata",
     "routes" : [
         {
-            "source" : "^/poapp/webapp/(.*)",
+            "source" : "^/purchaseorders/webapp/(.*)",
             "target" : "$1",
-            "localDir" : "poapp/webapp/",
+            "localDir" : "purchaseorders/webapp/",
             "authenticationType" : "xsuaa"
         },
         {
             "source" : "^/(.*)$",
-            "target" : "srv-api",
+            "destination" : "srv-api",
             "authenticationType" : "xsuaa"
         }
     ]
