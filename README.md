@@ -1,25 +1,31 @@
-# Getting Started
+# Purchase Orders Application
 
-Welcome to your new project.
+This is a full-stack application for managing purchase orders, built using the SAP Cloud Application Programming (CAP) Model, Node.js, and SAP Fiori.
 
-It contains these folders and files, following our recommended project layout:
+## Project Structure
 
-File or Folder | Purpose
----------|----------
-`app/` | content for UI frontends goes here
-`db/` | your domain models and data go here
-`srv/` | your service models and code go here
-`package.json` | project metadata and configuration
-`readme.md` | this getting started guide
+This project follows the recommended SAP CAP application layout:
 
+| File or Folder | Purpose                                                                               |
+| -------------- | ------------------------------------------------------------------------------------- |
+| `app/`         | Contains the UI frontend components (SAP Fiori elements app in `app/purchaseorders`). |
+| `db/`          | Contains domain models, data structures, and views (`datamodel.cds`, `cdsviews.cds`). |
+| `srv/`         | Contains service definitions and custom logic (`cat-service.cds`, `cat-service.js`).  |
+| `package.json` | Project metadata and configuration.                                                   |
+| `mta.yaml`     | Multi-Target Application descriptor for deployment to SAP BTP.                        |
 
-## Next Steps
+## Getting Started
 
-- Open a new terminal and run `cds watch`
-- (in VS Code simply choose _**Terminal** > Run Task > cds watch_)
-- Start adding content, for example, a [db/schema.cds](db/schema.cds).
+To run the application locally, open a new terminal in the project root and execute:
 
+```bash
+cds watch
+```
+
+_(In VS Code, you can also choose **Terminal** > Run Task > cds watch)_
+
+This will spin up the CAP server with an in-memory database and serve the OData endpoints alongside the Fiori UI. The terminal will output a localhost URL (usually `http://localhost:4004`) where you can launch the app.
 
 ## Learn More
 
-Learn more at https://cap.cloud.sap/docs/get-started/.
+Learn more about SAP CAP at [https://cap.cloud.sap/docs/get-started/](https://cap.cloud.sap/docs/get-started/).
